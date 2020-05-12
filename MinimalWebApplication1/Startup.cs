@@ -26,10 +26,15 @@ namespace MinimalWebApplication1
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Use(async (context, next) =>
-           {
-               await context.Response.WriteAsync("Hello World");
-           });
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGet("/", async context =>
+                {
+                    await context.Response.WriteAsync("Hello from the router");
+                });
+            });
         }
     }
 }
